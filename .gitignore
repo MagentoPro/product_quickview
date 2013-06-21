@@ -20,6 +20,7 @@
 # ignore all in js, except module files for this module
 /js/*
 !/js/quickview/
+!/js/jquery
 
 # Ignore all in app, except code, etc, and design
 # Ignore all in app/code except /local/SFC
