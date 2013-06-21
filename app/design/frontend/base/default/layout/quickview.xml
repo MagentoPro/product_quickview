@@ -1,0 +1,58 @@
+<?xml version="1.0"?>   
+<layout version="0.1.0">
+                
+	<default>
+		<reference name="head">
+			<action method="addItem"><type>skin_js</type><name>js/quickview.js</name></action>
+			<action method="addItem"><type>skin_css</type><name>css/quickview.css</name></action>
+            <action method="addJs"><script>varien/product.js</script></action>
+		</reference>
+	</default>
+
+				
+    <quickview_index_index>   
+        <reference name="root">   
+            <action method="setTemplate"><template>page/ajax.phtml</template></action>   
+        </reference> 	
+	
+        <reference name="content">
+            <block type="catalog/product_view" name="quickview_index" template="quickview/index.phtml"> 
+                <action method="setTierPriceTemplate"><template>catalog/product/view/tierprices.phtml</template></action> 
+                <block type="catalog/product_view" name="product.info.addtocart" as="addtocart" template="catalog/product/view/addtocart.phtml"/>
+                <block type="catalog/product_view" name="product.price" as="price" template="catalog/product/price.phtml"/>
+                <!-- adding custom add-to-cart button for ajax call on quickview page  -->
+                <reference name="product.info.addtocart">
+                    <action method="setTemplate"><template>quickview/addtocart/addtocart.phtml</template></action>                
+                </reference>
+                <!-- end -->
+                <block type="catalog/product_view_media" name="product.info.media" as="media" template="catalog/product/view/media.phtml"/>	
+                <block type="checkout/cart_sidebar" name="cart_topbar" as="cartTopBar" template="checkout/cart/topbar.phtml"/>
+                <block type="catalog/product_view" name="product.info.options.wrapper" as="product_options_wrapper" template="catalog/product/view/options/wrapper.phtml" translate="label">
+                <label>Info Column Options Wrapper</label>
+                <block type="core/template" name="options_js" template="catalog/product/view/options/js.phtml"/>
+                <block type="catalog/product_view_options" name="product.info.options" as="product_options" template="catalog/product/view/options.phtml">
+                    <action method="addOptionRenderer"><type>text</type><block>catalog/product_view_options_type_text</block><template>catalog/product/view/options/type/text.phtml</template></action>
+                    <action method="addOptionRenderer"><type>file</type><block>catalog/product_view_options_type_file</block><template>catalog/product/view/options/type/file.phtml</template></action>
+                    <action method="addOptionRenderer"><type>select</type><block>catalog/product_view_options_type_select</block><template>catalog/product/view/options/type/select.phtml</template></action>
+                    <action method="addOptionRenderer"><type>date</type><block>catalog/product_view_options_type_date</block><template>catalog/product/view/options/type/date.phtml</template></action>
+                </block>
+                <block type="core/html_calendar" name="html_calendar" as="html_calendar" template="page/js/calendar.phtml"/>	
+            </block>
+            <block type="catalog/product_view" name="product.info.options.wrapper.bottom" as="product_options_wrapper_bottom" template="catalog/product/view/options/wrapper/bottom.phtml" translate="label">
+                <label>Bottom Block Options Wrapper</label>
+                <action method="insert"><block>product.tierprices</block></action>
+                <block type="catalog/product_view" name="product.clone_prices" as="prices" template="catalog/product/view/price_clone.phtml"/>
+                    <action method="append"><block>product.info.addtocart</block></action>
+                    <action method="append"><block>product.info.addto</block></action>
+                </block>   				
+            </block>	         
+        </reference>
+    </quickview_index_index>   
+  
+    <quickview_index_add>
+       <reference name="root">   
+           <action method="setTemplate"><template>page/empty.phtml</template></action>   
+       </reference>
+    </quickview_index_add>
+</layout>   
+	
