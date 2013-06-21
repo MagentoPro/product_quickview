@@ -33,6 +33,8 @@
 /app/code/core
 /app/code/community
 /app/code/local/*
+!app/code/local/MV/
+app/code/local/MV/*
 !app/code/local/MV/Quickview/
 
 # Ignore all of app/etc except our specific module files

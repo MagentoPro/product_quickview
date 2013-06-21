@@ -1,0 +1,127 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Product Quickview Extension - By Luke James
+ *
+ * This source file is subject to commercial source code license of Magento Vancouver, Inc.
+ *
+ * @category	MV
+ * @package    	MV_Quickview
+ * @author      Luke James
+ * @email 	    james.luke318@gmail.com
+ * @copyright 	Copyright (C) 2009-2013 Magento Vancouver, Inc. All Rights Reserved.
+ *
+ */
+-->
+<config>
+	<!-- Module version info -->
+	<modules>
+		<MV_Quickview>
+			<version>0.9.0</version>
+		</MV_Quickview>
+	</modules>
+	
+	<frontend>
+		<routers>
+			<quickview>
+				<use>standard</use>
+				<args>
+					<module>MV_Quickview</module>
+					<frontName>quickview</frontName>
+				</args>
+			</quickview>
+		</routers>
+		<layout>
+			<updates>
+				<quickview>
+					<file>quickview.xml</file>
+				</quickview>
+			</updates>
+		</layout>
+  </frontend>
+
+	<global>
+		<!-- Helper classes -->
+		<helpers>
+			<quickview>
+				<class>MV_Quickview_Helper</class>
+			</quickview>
+		</helpers>
+		
+		<!-- Block classes -->
+		<blocks>
+			<quickview>
+				<class>MV_Quickview_Block</class>
+			</quickview>
+		</blocks>
+		
+		<!-- Model / entity classes -->
+		<models>
+
+		</models>
+		
+		<!-- Resources - Install / upgrade scripts -->
+		<resources>
+			<quickview_setup>
+				<setup>
+					<module>MV_Quickview</module>
+					<class>Mage_Eav_Model_Entity_Setup</class>
+				</setup>
+				<connection>
+					<use>core_setup</use>
+				</connection>
+			</quickview_setup>
+			<quickview_write>
+				<connection>
+					<use>core_write</use>
+				</connection>
+			</quickview_write>
+			<quickview_read>
+				<connection>
+					<use>core_read</use>
+				</connection>
+			</quickview_read>
+		</resources>
+		
+		<!-- Event observers -->
+		<events>
+		</events>
+		<!-- end event observer -->
+	</global>
+
+	<!-- Admin panel routers -->
+	<admin>
+		<routers>
+			<quickview>
+				<use>admin</use>
+				<args>
+					<module>MV_Quickview</module>
+					<frontName>quickviewadmin</frontName>
+				</args>
+			</quickview>
+		</routers>
+	</admin>
+
+	<!-- Admin panel html changes -->
+	<adminhtml>
+		<layout>
+			<updates>
+				<quickview>
+					<file>quickview.xml</file>
+				</quickview>
+			</updates>
+		</layout>
+	</adminhtml>
+
+	<!-- Cron schedules for integration jobs -->
+	<crontab>
+		<jobs>
+		</jobs>
+	</crontab>
+
+	<!-- Default configuration values -->
+	<default>
+
+	</default>
+	
+</config>
