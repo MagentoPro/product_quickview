@@ -1,0 +1,78 @@
+# ignore phpstorm files
+/.idea
+
+# Ignore all not in app & skin
+/*
+!/.gitignore
+!/app/
+!/js/
+!/var/
+!/skin/
+
+# Allow shell scripts starting with "autoship_*"
+/shell/*
+!/shell/quickview_*
+
+# Needed for Magento pacakge configuration file
+/var/*
+!/var/connect/
+
+# ignore all in js, except module files for this module
+/js/*
+!/js/quickview/
+
+# Ignore all in app, except code, etc, and design
+# Ignore all in app/code except /local/SFC
+/app/*
+!/app/code/
+!/app/etc/
+!/app/design/
+
+# Ignore all in app/code/local except SFC
+/app/code/core
+/app/code/community
+/app/code/local/*
+!app/code/local/MV/Quickview/
+
+# Ignore all of app/etc except our specific module files
+/app/etc/*
+!/app/etc/modules/
+/app/etc/modules/*
+!/app/etc/modules/MV_Quickview.xml
+
+#Ignore all of app/design except for our files
+/app/design/*
+!app/design/frontend/
+!app/design/adminhtml/
+/app/design/frontend/*
+!/app/design/frontend/base/
+/app/design/frontend/base/default/etc/
+/app/design/frontend/base/default/template/*
+!/app/design/frontend/base/default/template/quickview/
+/app/design/frontend/base/default/layout/*
+!/app/design/frontend/base/default/layout/quickview.xml
+/app/design/adminhtml/*
+!/app/design/adminhtml/default/
+/app/design/adminhtml/default/find/
+/app/design/adminhtml/default/default/etc/
+/app/design/adminhtml/default/default/locale/
+/app/design/adminhtml/default/default/template/*
+!/app/design/adminhtml/default/default/template/quickview/
+/app/design/adminhtml/default/default/layout/*
+!/app/design/adminhtml/default/default/layout/quickview.xml
+
+# Ignore most of skin, except for our module file
+/skin/*
+!/skin/frontend/
+/skin/frontend/*
+!/skin/frontend/base/
+/skin/frontend/base/default/*
+!/skin/frontend/base/default/css/
+!/skin/frontend/base/default/js/
+/skin/frontend/base/default/css/*
+!/skin/frontend/base/default/css/quickview.css
+/skin/frontend/base/default/js/*
+!/skin/frontend/base/default/js/quickview/
+!/skin/frontend/base/default/images/
+/skin/frontend/base/default/images/*
+!/skin/frontend/base/default/images/quickview/
