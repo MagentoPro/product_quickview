@@ -75,7 +75,7 @@ app/code/local/MV/*
 /skin/frontend/base/default/css/*
 !/skin/frontend/base/default/css/quickview.css
 /skin/frontend/base/default/js/*
-!/skin/frontend/base/default/js/quickview/
+!/skin/frontend/base/default/js/quickview.js
 !/skin/frontend/base/default/images/
 /skin/frontend/base/default/images/*
 !/skin/frontend/base/default/images/quickview/

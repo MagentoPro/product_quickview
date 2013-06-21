@@ -1,0 +1,119 @@
+#lightbox {
+	position: absolute;
+	top: 0;
+	left: 50%;
+	width: 700px;
+	/*height:460px;*/
+	margin-left: -375px;
+	padding:10px;
+	border:5px solid #cccccc;
+	background: #fff;
+	z-index: 1001;
+       box-shadow: 0px 0px 12px #000;
+	display: none;
+}
+#lightbox-shadow {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	background: #ffffff;
+	z-index: 1000;
+	display: none;
+}
+
+.quick_view_loading {
+       background: url('../images/spinner.gif');
+	height:450px;
+	width:50px;
+	margin-top:200px;
+	margin:auto;
+       background-repeat:no-repeat;
+}
+
+#quickview-cart-container {
+	margin-top:10px;
+}
+
+#quickview-cart-container img {
+       float:left;
+	margin-right:8px;
+	vertical-align: middle;
+}
+#quickview-cart-container .hasitems {
+    color: #A9010D;
+    margin-right: 14px;
+}
+#quickview-cart-container .cart-status {
+    float: left;
+    padding-top: 8px;
+}
+
+#quickview-cart-container .hasitems a {
+    color: #A9010D;
+}
+
+#quickview-cart-container .price {
+    color: #868686;
+    padding: 0;
+}
+#quickview-cart-container button {
+    background: none repeat scroll 0 0 #cccccc;
+    border: medium none;
+    float: right;
+    font-size: 12px !important;
+    font-weight: bold;
+    margin-top: 15px;
+    padding: 3px 3px;
+    text-transform: none;
+}
+.form-button, .form-button-alt, .one-page-checkout .button {
+    background: none repeat scroll 0 0 #BFCDD8;
+    border: 1px solid #BFCDD8;
+    color: #FFFFFF;
+    cursor: pointer;
+    font: bold 12px arial,sans-serif !important;
+    overflow: visible;
+    padding: 1px 8px;
+    text-align: center;
+    text-transform: uppercase;
+    vertical-align: middle;
+    width: inherit;
+}
+
+#bingo .price {
+    right:10px;
+    position:absolute;
+}
+
+.quickview-button {
+    background:#373737; 
+    position: absolute;
+    width:62px; 
+    bottom: 173px; 
+    left: 5px;  
+    height:13px; 
+    display:none; 
+    padding-bottom:6px;
+    padding-left:5px;
+    padding-right:5px;
+}
+
+.quickview-button a { 
+    color:#E1E1E1;
+    font-weight:bold;
+    font-size:10px;
+    padding-top:0px;
+    position: absolute; 
+    width:62px;
+    height:10px;
+}
+
+
+.quickview-button a { 
+    text-decoration:none;
+}
+
+

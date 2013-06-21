@@ -1,0 +1,98 @@
+<?php
+/**
+ * Magento
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Academic Free License (AFL 3.0)
+ * that is bundled with this package in the file LICENSE_AFL.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/afl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category   design_default
+ * @package    Mage
+ * @copyright  Copyright (c) 2008 Irubin Consulting Inc. DBA Varien (http://www.varien.com)
+ * @license    http://opensource.org/licenses/afl-3.0.php  Academic Free License (AFL 3.0)
+ */
+?>
+
+<?php $_product = $this->getProduct() ?>
+
+<?php if($_product->isSaleable()): ?>
+    <fieldset class="add-to-cart-box">
+        <legend><?php echo $this->__('Add Items to Cart') ?></legend>
+        <?php if(!$_product->isGrouped()): ?>
+        <span class="qty-box"><div class="selectLabel">select qty</div>
+		<?php 
+		$increment = $this->htmlEscape($_product->getData('increment'));
+		$steps = $this->htmlEscape($_product->getData('increment_steps'));
+		//echo $increment;
+		if($increment) {
+		?>
+		
+		<select name="qty" id="qty">
+		<?php 
+			$i = 1;
+			while ($i <= $steps) { 
+		?>
+			<option value="<?php echo $i * $increment; ?>"><?php echo $i * $increment; ?></option>				
+		<?php $i++; } ?>
+		</select></span>
+		
+		<?php	
+		} else {
+		
+		?>
+			<select name="qty" id="qty">
+			  <option value="1" selected="selected">1</option>
+			  <option value="2">2</option>
+			  <option value="3">3</option>
+			  <option value="4">4</option>
+			  <option value="5">5</option>
+			  <option value="6">6</option>
+			  <option value="7">7</option>
+			  <option value="8">8</option>
+			  <option value="9">9</option>
+			  <option value="10">10</option>
+			</select></span>
+		<?php }// end if ?>
+        <?php endif; ?>
+        
+       <button type="submit" class="form-button addToCart"><span><?php echo $this->__('Add to Bag') ?></span></button>
+       <span id='ajax_loader' style='display:none'><img src='<?php echo $this->getSkinUrl('images/opc-ajax-loader.gif')?>'/></span>        
+        
+    </fieldset>
+<?php endif; ?>
+<script type="text/javascript">
+//<![CDATA[
+	$j('#product_addtocart_form button').on('click', function(e){
+		e.preventDefault();
+		var passed = true;
+		$j('#product_addtocart_form .required-entry').each(function(){
+			if(($j(this).val() > 0) == false){
+				$j(this).parent().prev().prev().find('label').css('color', 'red');
+				console.log('failed');
+				passed = false;
+			}
+		});
+		if(passed){
+			productAddToCartForm.submit();
+		}
+	});
+	$j('#product_addtocart_form a').on('click', function(){
+		$j(this).parents('dl').find('label').css('color', 'black');
+	});
+	$j(document).ready(function(){
+		$j('.productSwatch a:first').click();
+	});
+//]]>
+</script>

@@ -1,0 +1,107 @@
+<?php
+    $_helper = $this->helper('catalog/output');
+    $_product = $this->getProduct();
+?>
+<h2 style="float:right;width:270px;margin-top:15px;margin-right:10px;"> <?= $_product->getName(); ?></h2>
+<script type="text/javascript">
+    var optionsPrice = new Product.OptionsPrice(<?php echo $this->getJsonConfig() ?>);
+</script>
+
+            <form action="<?php echo $this->getAddToCartUrl($_product) ?>"  method="post" id="product_addtocart_form"<?php if($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
+                <div class="product-img-box" style="float:left;">
+                    <?php echo $this->getChildHtml('media') ?>
+                </div>
+                <div class="product-shop" style="margin-top:5px; margin-right:10px; width:270px; text-align:left;">
+		      <?php if ($_product->isSaleable() && $this->hasOptions()):?>
+                           <?php echo $this->getChildHtml('product_options_wrapper') ?>
+		             <?php echo $this->getChildHtml('product_options') ?>
+			      <?php echo $this->getChildHtml('product_options_wrapper_bottom') ?>
+	             <?php else: ?>     
+                       <div class="add-to-holder" >
+                           <div id="bingo" class="product-options-bottom">
+			          <?php echo $this->getChildHtml('addtocart') ?>
+                               <?php echo $this->getChildHtml('price') ?>
+                           </div>
+		         </div>
+
+		      <?php endif; ?>
+	         </div> 
+           </form>
+	
+		<div id="quickview-cart-container" style='margin-top:15px; display:block; float:left; margin-left:10px;'>
+		    <?php echo $this->getChildHtml('cartTopBar') ?>
+		</div>
+
+<script type="text/javascript">
+$j(document).ready(function() {
+  if($j('.viewLarger')) {
+      $j('.viewLarger').hide();
+  }
+});
+</script>
+
+    <script type="text/javascript">
+    //<![CDATA[
+        var productAddToCartForm = new VarienForm('product_addtocart_form');
+    	productAddToCartForm.submit = function(button, url) {
+		if (this.validator.validate()) {
+			var form = this.form;
+			var oldUrl = form.action;
+			if (url) {
+				form.action = url;
+			}
+			var e = null;
+			// Send form via ajax 
+			if (!url) {
+				url = $j('#product_addtocart_form').attr('action');
+			}
+			url = url.replace("checkout/cart","quickview/index"); // New Code
+			var data = $j('#product_addtocart_form').serialize();
+			data += '&isAjax=1';
+			$j('#ajax_loader').show();
+                    $j(".product-options-bottom").css({ opacity: 0.5 });
+			try {
+				$j.ajax( {
+					url : url,
+					dataType : 'json',
+					type : 'post',
+					data : data,
+					success : function(data) {
+						$j('#ajax_loader').hide();
+                                          $j(".product-options-bottom").css({ opacity: 1.0 });
+
+                        //alert(data.status + ": " + data.message);
+                        if($j('.cart-status-box')){
+                            $j('.cart-status-box').replaceWith(data.toplink);
+                        }
+                        if($j('.header .links')){
+                            $j('.header .links').replaceWith(data.toplink);
+				closeLightbox();
+                        }
+					}
+				});
+			} catch (e) {  }
+			// End of ajax
+			this.form.action = oldUrl;
+			if (e) {
+				throw e;
+			}
+		}
+	}.bind(productAddToCartForm);
+    productAddToCartForm.submitLight = function(button, url){
+            if(this.validator) {
+                var nv = Validation.methods;
+                delete Validation.methods['required-entry'];
+                delete Validation.methods['validate-one-required'];
+                delete Validation.methods['validate-one-required-by-name'];
+                if (this.validator.validate()) {
+                    if (url) {
+                        this.form.action = url;
+                    }
+                    this.form.submit();
+                }
+                Object.extend(Validation.methods, nv);
+            }
+        }.bind(productAddToCartForm);
+    //]]>
+    </script>
