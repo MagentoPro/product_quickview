@@ -25,12 +25,12 @@
 }
 
 .quick_view_loading {
-       background: url('../images/spinner.gif');
+    background: url('../images/spinner.gif');
 	height:450px;
 	width:50px;
 	margin-top:200px;
 	margin:auto;
-       background-repeat:no-repeat;
+    background-repeat:no-repeat;
 }
 
 #quickview-cart-container {
@@ -92,13 +92,15 @@
     background:#373737; 
     position: absolute;
     width:62px; 
-    bottom: 173px; 
+    bottom: 244px; 
     left: 5px;  
     height:13px; 
     display:none; 
+    padding-top:4px;
     padding-bottom:6px;
     padding-left:5px;
     padding-right:5px;
+    opacity:0.6;
 }
 
 .quickview-button a { 

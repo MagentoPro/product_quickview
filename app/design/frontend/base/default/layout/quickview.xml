@@ -1,13 +1,19 @@
 <?xml version="1.0"?>   
 <layout version="0.1.0">
-                
-	<default>
-		<reference name="head">
+    
+    <catalog_category_default>
+        <reference name="head">
 			<action method="addItem"><type>skin_js</type><name>js/quickview.js</name></action>
 			<action method="addItem"><type>skin_css</type><name>css/quickview.css</name></action>
+            <action method="addJs"><script>jquery/jquery-1.8.2.js</script></action>
+            <action method="addJs"><script>jquery/noconflict.js</script></action>
             <action method="addJs"><script>varien/product.js</script></action>
-		</reference>
-	</default>
+        </reference>
+        <reference name='product_list'>
+	        	<action method='setTemplate'><template>quickview/catalog/product/list.phtml</template></action>
+	    </reference>
+    </catalog_category_default>
+    
 
 				
     <quickview_index_index>   
