@@ -1,45 +1,80 @@
-<?php
-    $_helper = $this->helper('catalog/output');
-    $_product = $this->getProduct();
-?>
-<h2 style="float:right;width:270px;margin-top:15px;margin-right:10px;"> <?= $_product->getName(); ?></h2>
+<?php $_helper = $this->helper('catalog/output'); ?>
+<?php $_product = $this->getProduct(); ?>
 <script type="text/javascript">
     var optionsPrice = new Product.OptionsPrice(<?php echo $this->getJsonConfig() ?>);
 </script>
+<div id="messages_product_view"><?php echo $this->getMessagesBlock()->getGroupedHtml() ?></div>
+<div class="product-view">
+    <div class="product-essential">
+    <form action="<?php echo $this->getSubmitUrl($_product) ?>" method="post" id="product_addtocart_form"<?php if($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
+        <div class="no-display">
+            <input type="hidden" name="product" value="<?php echo $_product->getId() ?>" />
+            <input type="hidden" name="related_product" id="related-products-field" value="" />
+        </div>
 
-            <form action="<?php echo $this->getAddToCartUrl($_product) ?>"  method="post" id="product_addtocart_form"<?php if($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
-                <div class="product-img-box" style="float:left;">
-                    <?php echo $this->getChildHtml('media') ?>
+        <div class="product-shop">
+            <div class="product-name">
+                <h1><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h1>
+            </div>
+
+            <?php if ($this->canEmailToFriend()): ?>
+                <p class="email-friend"><a href="<?php echo $this->helper('catalog/product')->getEmailToFriendUrl($_product) ?>"><?php echo $this->__('Email to a Friend') ?></a></p>
+            <?php endif; ?>
+
+            <?php echo $this->getReviewsSummaryHtml($_product, false, true)?>
+            <?php echo $this->getChildHtml('alert_urls') ?>
+            <?php echo $this->getChildHtml('product_type_data') ?>
+            <?php echo $this->getTierPriceHtml() ?>
+            <?php echo $this->getChildHtml('extrahint') ?>
+
+            <?php if (!$this->hasOptions()):?>
+                <div class="add-to-box">
+                    <?php if($_product->isSaleable()): ?>
+                        <?php echo $this->getChildHtml('addtocart') ?>
+                        <?php if( $this->helper('wishlist')->isAllow() || $_compareUrl=$this->helper('catalog/product_compare')->getAddUrl($_product)): ?>
+                            <span class="or"><?php echo $this->__('OR') ?></span>
+                        <?php endif; ?>
+                    <?php endif; ?>
+                    <?php echo $this->getChildHtml('addto') ?>
                 </div>
-                <div class="product-shop" style="margin-top:5px; margin-right:10px; width:270px; text-align:left;">
-		      <?php if ($_product->isSaleable() && $this->hasOptions()):?>
-                           <?php echo $this->getChildHtml('product_options_wrapper') ?>
-		             <?php echo $this->getChildHtml('product_options') ?>
-			      <?php echo $this->getChildHtml('product_options_wrapper_bottom') ?>
-	             <?php else: ?>     
-                       <div class="add-to-holder" >
-                           <div id="bingo" class="product-options-bottom">
-			          <?php echo $this->getChildHtml('addtocart') ?>
-                               <?php echo $this->getChildHtml('price') ?>
-                           </div>
-		         </div>
+                <?php echo $this->getChildHtml('extra_buttons') ?>
+            <?php elseif (!$_product->isSaleable()): ?>
+                <div class="add-to-box">
+                    <?php echo $this->getChildHtml('addto') ?>
+                </div>
+            <?php endif; ?>
 
-		      <?php endif; ?>
-	         </div> 
-           </form>
-	
-		<div id="quickview-cart-container" style='margin-top:15px; display:block; float:left; margin-left:10px;'>
-		    <?php echo $this->getChildHtml('cartTopBar') ?>
-		</div>
+            <?php if ($_product->getShortDescription()):?>
+                <div class="short-description">
+                    <h2><?php echo $this->__('Quick Overview') ?></h2>
+                    <div class="std"><?php echo $_helper->productAttribute($_product, nl2br($_product->getShortDescription()), 'short_description') ?></div>
+                </div>
+            <?php endif;?>
 
-<script type="text/javascript">
-$j(document).ready(function() {
-  if($j('.viewLarger')) {
-      $j('.viewLarger').hide();
-  }
-});
-</script>
+            <?php echo $this->getChildHtml('other');?>
 
+            <?php if ($_product->isSaleable() && $this->hasOptions()):?>
+                <?php echo $this->getChildChildHtml('container1', '', true, true) ?>
+            <?php endif;?>
+
+        </div>
+
+        <div class="product-img-box">
+            <?php echo $this->getChildHtml('media') ?>
+        </div>
+
+        <div class="clearer"></div>
+        <?php if ($_product->isSaleable() && $this->hasOptions()):?>
+            <?php echo $this->getChildChildHtml('container2', '', true, true) ?>
+        <?php endif;?>
+    </form>
+ <script type="text/javascript">
+//<![CDATA[
+    $jQuery(document).ready(function() {
+        product_zoom = new Product.Zoom('image', 'track', 'handle', 'zoom_in', 'zoom_out', 'track_hint');
+    });
+//]]>
+</script>   
     <script type="text/javascript">
     //<![CDATA[
         var productAddToCartForm = new VarienForm('product_addtocart_form');
@@ -53,32 +88,38 @@ $j(document).ready(function() {
 			var e = null;
 			// Send form via ajax 
 			if (!url) {
-				url = $j('#product_addtocart_form').attr('action');
+				url = $jQuery('#product_addtocart_form').attr('action');
 			}
 			url = url.replace("checkout/cart","quickview/index"); // New Code
-			var data = $j('#product_addtocart_form').serialize();
+			var data = $jQuery('#product_addtocart_form').serialize();
 			data += '&isAjax=1';
-			$j('#ajax_loader').show();
-                    $j(".product-options-bottom").css({ opacity: 0.5 });
+			$jQuery('#ajax_loader').show();
+                    $jQuery(".product-options-bottom").css({ opacity: 0.5 });
 			try {
-				$j.ajax( {
+				$jQuery.ajax( {
 					url : url,
 					dataType : 'json',
 					type : 'post',
 					data : data,
 					success : function(data) {
-						$j('#ajax_loader').hide();
-                                          $j(".product-options-bottom").css({ opacity: 1.0 });
+						$jQuery('#ajax_loader').hide();
+                        $jQuery(".product-options-bottom").css({ opacity: 1.0 });
 
-                        //alert(data.status + ": " + data.message);
-                        if($j('.cart-status-box')){
-                            $j('.cart-status-box').replaceWith(data.toplink);
+                        if($jQuery('.cart-status-box')){
+                           // $jQuery('.cart-status-box').replaceWith(data.toplink);
                         }
-                        if($j('.header .links')){
-                            $j('.header .links').replaceWith(data.toplink);
-				closeLightbox();
+                        if($jQuery('.header .links')){
+                            //$jQuery('.header .links').replaceWith(data.toplink);
                         }
-					}
+                        if($jQuery('.block-cart')){
+                            //$jQuery('.block-cart').replaceWith(data.sidecart);
+                        }
+                        closeLightbox();
+					},
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        alert(xhr.status);
+                        alert(thrownError);
+                    }
 				});
 			} catch (e) {  }
 			// End of ajax
@@ -88,20 +129,6 @@ $j(document).ready(function() {
 			}
 		}
 	}.bind(productAddToCartForm);
-    productAddToCartForm.submitLight = function(button, url){
-            if(this.validator) {
-                var nv = Validation.methods;
-                delete Validation.methods['required-entry'];
-                delete Validation.methods['validate-one-required'];
-                delete Validation.methods['validate-one-required-by-name'];
-                if (this.validator.validate()) {
-                    if (url) {
-                        this.form.action = url;
-                    }
-                    this.form.submit();
-                }
-                Object.extend(Validation.methods, nv);
-            }
-        }.bind(productAddToCartForm);
+    
     //]]>
     </script>

@@ -18,7 +18,7 @@
 				
     <quickview_index_index>   
         <reference name="root">   
-            <action method="setTemplate"><template>page/ajax.phtml</template></action>   
+            <action method="setTemplate"><template>quickview/page/ajax.phtml</template></action>   
         </reference> 	
 	
         <reference name="content">

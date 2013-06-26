@@ -8,18 +8,18 @@ class MV_Quickview_IndexController extends Mage_Checkout_CartController {
 
     public function IndexAction() {
 	
-     // Get data from request and load product
-	 $product_id = $this->getRequest()->getParams();
-	 $product = Mage::getModel('catalog/product')->load($product_id['product_id']);
+        // Get data from request and load product
+        $product_id = $this->getRequest()->getParams();
+        $product = Mage::getModel('catalog/product')->load($product_id['product_id']);
 	  
-     // Prepare helper and params
-	 $params = new Varien_Object();
+        // Prepare helper and params
+        $params = new Varien_Object();
         $params->setSpecifyOptions(false);
-	 //$params->setCategoryId($categoryId);
+        //$params->setCategoryId($categoryId);
   
-     //initilize product and render page
-	 $viewHelper = Mage::helper('catalog/product_view');
-	 $viewHelper->prepareAndRender($product->getId(), $this, $params);
+        //initilize product and render page
+        $viewHelper = Mage::helper('catalog/product_view');
+        $viewHelper->prepareAndRender($product->getId(), $this, $params);
 
     }
 	
@@ -65,9 +65,11 @@ class MV_Quickview_IndexController extends Mage_Checkout_CartController {
 					$response['status'] = 'SUCCESS';
 					$response['message'] = $message;
 					$this->loadLayout();
-					$toplink = $this->getLayout()->getBlock('cart_topbar')->toHtml();
+					$toplink = $this->getLayout()->getBlock('top.links')->toHtml();
+                    $sidecart = $this->getLayout()->getBlock('cart_sidebar')->toHtml();
 					//Mage::register('referrer_url', $this->_getRefererUrl());
 					$response['toplink'] = $toplink;
+                    $response['sidecart'] = $sidecart;
 				}
 			} catch (Mage_Core_Exception $e) {
 				$msg = "";
