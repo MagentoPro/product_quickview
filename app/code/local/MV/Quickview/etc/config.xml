@@ -53,6 +53,11 @@
 			<quickview>
 				<class>MV_Quickview_Block</class>
 			</quickview>
+            <catalog>
+                <rewrite>
+                    <product_list>MV_Quickview_Block_Product_List</product_list>
+                </rewrite>
+            </catalog>
 		</blocks>
 		
 		<!-- Model / entity classes -->

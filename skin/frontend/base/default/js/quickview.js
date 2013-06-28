@@ -55,7 +55,7 @@ function lightbox(insertContent, ajaxContentUrl){
 		
 		// display the lightbox
 		$('#lightbox').slideToggle("slow");
-              $("#lightbox-shadow").css({ opacity: 0.7 });
+              $("#lightbox-shadow").css({ opacity: 0.8 });
 		$('#lightbox-shadow').fadeIn();
 	
 	})(jQuery); // end jQuery wrapper

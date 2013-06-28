@@ -9,9 +9,6 @@
             <action method="addJs"><script>jquery/noconflict.js</script></action>
             <action method="addJs"><script>varien/product.js</script></action>
         </reference>
-        <reference name='product_list'>
-	        	<action method='setTemplate'><template>quickview/catalog/product/list.phtml</template></action>
-	    </reference>
     </catalog_category_default>
     
 

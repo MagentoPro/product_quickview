@@ -12,7 +12,7 @@
             <input type="hidden" name="related_product" id="related-products-field" value="" />
         </div>
 
-        <div class="product-shop">
+        <div class="product-shop" style="text-align:left;">
             <div class="product-name">
                 <h1><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h1>
             </div>
@@ -106,13 +106,13 @@
                         $jQuery(".product-options-bottom").css({ opacity: 1.0 });
 
                         if($jQuery('.cart-status-box')){
-                           // $jQuery('.cart-status-box').replaceWith(data.toplink);
+                            $jQuery('.cart-status-box').replaceWith(data.toplink);
                         }
                         if($jQuery('.header .links')){
-                            //$jQuery('.header .links').replaceWith(data.toplink);
+                            $jQuery('.header .links').replaceWith(data.toplink);
                         }
                         if($jQuery('.block-cart')){
-                            //$jQuery('.block-cart').replaceWith(data.sidecart);
+                            $jQuery('.block-cart').replaceWith(data.sidecart);
                         }
                         closeLightbox();
 					},
