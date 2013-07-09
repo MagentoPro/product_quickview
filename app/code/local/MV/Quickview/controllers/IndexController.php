@@ -64,6 +64,7 @@ class MV_Quickview_IndexController extends Mage_Checkout_CartController {
 					$message = $this->__('%s was added to the shopping cart.', Mage::helper('core')->htmlEscape($product->getName()));
 					$response['status'] = 'SUCCESS';
 					$response['message'] = $message;
+                    $response['message'] = '<ul class="messages"><li class="success-msg"><ul><li><span>'.$product->getName().' was added to your shopping cart.</span></li></ul></li></ul>';
 					$this->loadLayout();
 					$toplink = $this->getLayout()->getBlock('top.links')->toHtml();
                     $sidecart = $this->getLayout()->getBlock('cart_sidebar')->toHtml();

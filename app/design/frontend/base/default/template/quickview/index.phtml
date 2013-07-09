@@ -68,14 +68,19 @@
             <?php echo $this->getChildChildHtml('container2', '', true, true) ?>
         <?php endif;?>
     </form>
+<?php if ($_product->getImage() != 'no_selection' && $_product->getImage()): ?>
  <script type="text/javascript">
 //<![CDATA[
     $jQuery(document).ready(function() {
-        product_zoom = new Product.Zoom('image', 'track', 'handle', 'zoom_in', 'zoom_out', 'track_hint');
+        setTimeout(function(){
+            product_zoom = new Product.Zoom('image', 'track', 'handle', 'zoom_in', 'zoom_out', 'track_hint');
+        }, 100);
+           
     });
 //]]>
-</script>   
-    <script type="text/javascript">
+</script>
+<?php endif; ?>   
+<script type="text/javascript">
     //<![CDATA[
         var productAddToCartForm = new VarienForm('product_addtocart_form');
     	productAddToCartForm.submit = function(button, url) {
@@ -111,8 +116,14 @@
                         if($jQuery('.header .links')){
                             $jQuery('.header .links').replaceWith(data.toplink);
                         }
+                        if($jQuery('.links')){
+                            $jQuery('.links').replaceWith(data.toplink);
+                        }
                         if($jQuery('.block-cart')){
                             $jQuery('.block-cart').replaceWith(data.sidecart);
+                        }
+                        if($jQuery('.success-msg')){
+                            $jQuery('.page-title').prepend(data.message); 
                         }
                         closeLightbox();
 					},
@@ -132,3 +143,4 @@
     
     //]]>
     </script>
+    </div>
