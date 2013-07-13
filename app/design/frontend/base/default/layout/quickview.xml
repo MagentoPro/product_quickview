@@ -1,5 +1,16 @@
 <?xml version="1.0"?>   
 <layout version="0.1.0">
+
+    <default>
+       <!--  <reference name="cart_sidebar">
+            <action method="addItemRender"><type>simple</type><block>checkout/cart_item_renderer</block><template>quickview/checkout/cart/sidebar/default.phtml</template></action>   
+            <action method="addItemRender"><type>grouped</type><block>checkout/cart_item_renderer_grouped</block><template>quickview/checkout/cart/sidebar/default.phtml</template></action>
+            <action method="addItemRender"><type>configurable</type><block>checkout/cart_item_renderer_configurable</block><template>checkout/cart/sidebar/default.phtml</template></action>            
+        </reference> -->
+        <reference name="footer">
+            <block type="core/template" name="cat_session" template="quickview/catalog/category/categorysession.phtml" /> 
+        </reference>
+    </default>
     
     <catalog_category_default>
         <reference name="head">
@@ -16,14 +27,13 @@
         </reference>
     </catalog_category_default>
     
-
-				
-    <quickview_index_index>   
+    
+    <quickview_index_window>   
         <reference name="root">   
             <action method="setTemplate"><template>quickview/page/ajax.phtml</template></action>   
         </reference> 	
-	
         <reference name="content">
+
             <block type="catalog/product_view" name="quickview_index" template="quickview/index.phtml"> 
                 <!--
                 <action method="addReviewSummaryTemplate"><type>default</type><template>review/helper/summary.phtml</template></action>
@@ -86,7 +96,7 @@
             </block>
 	         
         </reference>
-    </quickview_index_index>   
+    </quickview_index_window>   
   
   <!--
 Additional block dependant on product type

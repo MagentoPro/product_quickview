@@ -6,8 +6,8 @@ class MV_Quickview_IndexController extends Mage_Checkout_CartController {
         parent::preDispatch();
     }
 
-    public function IndexAction() {
-	
+    public function windowAction() {
+
         // Get data from request and load product
         $product_id = $this->getRequest()->getParams();
         $product = Mage::getModel('catalog/product')->load($product_id['product_id']);
@@ -66,11 +66,13 @@ class MV_Quickview_IndexController extends Mage_Checkout_CartController {
 					$response['message'] = $message;
                     $response['message'] = '<ul class="messages"><li class="success-msg"><ul><li><span>'.$product->getName().' was added to your shopping cart.</span></li></ul></li></ul>';
 					$this->loadLayout();
+                    //$this->getLayout()->getBlock('cart_sidebar')->setTemplate('quickview/checkout/cart/sidebar/default.phtml');
 					$toplink = $this->getLayout()->getBlock('top.links')->toHtml();
                     $sidecart = $this->getLayout()->getBlock('cart_sidebar')->toHtml();
 					//Mage::register('referrer_url', $this->_getRefererUrl());
 					$response['toplink'] = $toplink;
                     $response['sidecart'] = $sidecart;
+                    
 				}
 			} catch (Mage_Core_Exception $e) {
 				$msg = "";
@@ -96,4 +98,42 @@ class MV_Quickview_IndexController extends Mage_Checkout_CartController {
 			return parent::addAction();
 		}
 	}
+    
+    public function removeAction() {
+        $id = (int) $this->getRequest()->getParam('itemid');
+        $encode = $this->getRequest()->getParam('unec');
+        $url = $this->getRequest()->getParam('url');
+        Mage::log($encode);
+     //$url = Mage::getModel("catalog/category")->load($catId)->getUrl(); 
+     //Mage::log($url);
+                        $this->_getCart()->removeItem($id)->save();
+                        $pieces = explode("/quickview/", $url);
+                        $this->_redirect($pieces[1]);
+    }
+    
+    /**
+     * Delete shoping cart item action
+     */
+    public function deleteAction()
+    {
+        $session = Mage::getSingleton('core/session',  array('name'=>'frontend')); Mage::log($session->getData('catid'));
+        if($session->getData('catid') && $session->getData('catid') != 0) {
+                $catId = $session->getData('catid');
+                $url = Mage::getModel('catalog/category')->load($catId)->getUrl();
+                $rout = explode(Mage::getBaseUrl(), $url);
+                $id = (int) $this->getRequest()->getParam('id');
+                if ($id) {
+                    try {
+                        $this->_getCart()->removeItem($id)->save();
+                    } catch (Exception $e) {
+                        $this->_getSession()->addError($this->__('Cannot remove the item.'));
+                        Mage::logException($e);
+                    }
+                }
+                $this->_redirect($rout[1]);
+        }
+        else {
+            parent::deleteAction();
+        }
+    }
 }

@@ -1,0 +1,14 @@
+<?php 
+    $session = Mage::getSingleton("core/session",  array("name"=>"frontend"));
+    $currentUrl = Mage::helper('core/url')->getCurrentUrl();
+    $parts = explode(Mage::getBaseUrl(),$currentUrl);
+?>
+                    
+<?php   
+    if(Mage::getModel('catalog/layer')->getCurrentCategory()->getId() != 2 && !Mage::registry('current_product')) { 
+        $session->setData('catid', Mage::getModel('catalog/layer')->getCurrentCategory()->getId());
+    }
+    elseif($parts[1] != 'skin/frontend/base/default/images/spinner.gif') {
+        $session->setData('catid', 0); 
+    } 
+?>

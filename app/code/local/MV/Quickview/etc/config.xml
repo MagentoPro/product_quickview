@@ -9,7 +9,7 @@
  * @package    	MV_Quickview
  * @author      Luke James
  * @email 	    james.luke318@gmail.com
- * @copyright 	Copyright (C) 2009-2013 Magento Vancouver, Inc. All Rights Reserved.
+ * @copyright 	Copyright (C) 2009-2013 Magento Vancouver Inc. All Rights Reserved.
  *
  */
 -->
@@ -41,6 +41,15 @@
   </frontend>
 
 	<global>
+    
+    <!-- Change the default delete from cart action -->
+        <rewrite>
+            <quickview>
+                <from><![CDATA[#^/checkout/cart/delete/#]]></from>
+                <to>/quickview/index/delete/</to>
+            </quickview>
+        </rewrite>
+        
 		<!-- Helper classes -->
 		<helpers>
 			<quickview>
@@ -97,13 +106,13 @@
 	<!-- Admin panel routers -->
 	<admin>
 		<routers>
-			<quickview>
+			<quickview_admin>
 				<use>admin</use>
 				<args>
 					<module>MV_Quickview</module>
 					<frontName>quickviewadmin</frontName>
 				</args>
-			</quickview>
+			</quickview_admin>
 		</routers>
 	</admin>
 
