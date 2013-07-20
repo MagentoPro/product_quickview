@@ -125,6 +125,28 @@
 				</quickview>
 			</updates>
 		</layout>
+        
+        <!-- module user privilages -->
+        <acl>
+            <resources>
+                <admin>
+                    <children>
+                        <system>
+                            <children>
+                                <config>
+                                    <children>
+                                        <settings>
+                                            <title>Product Quickview Options</title>
+                                        </settings>
+                                    </children>
+                                </config>
+                            </children>
+                        </system>
+                    </children>
+                </admin>
+            </resources>
+        </acl>
+        
 	</adminhtml>
 
 	<!-- Cron schedules for integration jobs -->

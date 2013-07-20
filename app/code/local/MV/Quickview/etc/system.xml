@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+
+<config>
+	<tabs>
+		<quickview translate="label" module="quickview">
+			<label>Product Quickview</label>
+			<sort_order>100</sort_order>
+		</quickview>
+	</tabs>
+	
+	<sections>
+		<settings translate="label" module="quickview">
+			<label>Settings</label>
+			<tab>quickview</tab>
+			<frontend_type>text</frontend_type>
+			<sort_order>3410</sort_order>
+			<show_in_default>1</show_in_default>
+			<show_in_website>1</show_in_website>
+			<show_in_store>1</show_in_store>
+			<groups>
+				<settings translate="label">
+					<label>Settings</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>1</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>1</show_in_store>
+					<fields>
+						<identifier translate="label">
+							<label>Client Identifier</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>0</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+							<comment>Enter your client ID provided by MyBuys</comment>
+						</identifier>
+					</fields>
+				</settings>				
+			</groups>
+		</settings>
+	</sections>
+</config>

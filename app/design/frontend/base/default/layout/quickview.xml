@@ -7,7 +7,7 @@
             <action method="addItemRender"><type>grouped</type><block>checkout/cart_item_renderer_grouped</block><template>quickview/checkout/cart/sidebar/default.phtml</template></action>
             <action method="addItemRender"><type>configurable</type><block>checkout/cart_item_renderer_configurable</block><template>checkout/cart/sidebar/default.phtml</template></action>            
         </reference> -->
-        <reference name="footer">
+        <reference name="head">
             <block type="core/template" name="cat_session" template="quickview/catalog/category/categorysession.phtml" /> 
         </reference>
     </default>

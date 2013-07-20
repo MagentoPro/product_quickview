@@ -43,6 +43,8 @@ function lightbox(insertContent, ajaxContentUrl){
 					// remove "Loading..." message and append AJAX content
 					$('#lightbox').empty();
 					$('#lightbox').append(data);
+                    // display the lightbox
+                    $('#lightbox').slideToggle("slow");
 				},
 				error:function(){
 					alert('Failed to load page');
@@ -53,9 +55,8 @@ function lightbox(insertContent, ajaxContentUrl){
 		// move the lightbox to the current window top + 100px
 		$('#lightbox').css('top', $(window).scrollTop() + 100 + 'px');
 		
-		// display the lightbox
-		$('#lightbox').slideToggle("slow");
-              $("#lightbox-shadow").css({ opacity: 0.8 });
+        //fade in the black background
+        $("#lightbox-shadow").css({ opacity: 0.8 });
 		$('#lightbox-shadow').fadeIn();
 	
 	})(jQuery); // end jQuery wrapper
