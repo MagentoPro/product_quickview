@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package>
+    <name>MV_Quickview</name>
+    <version>1.0.0</version>
+    <stability>alpha</stability>
+    <license>OSL</license>
+    <channel>community</channel>
+    <extends/>
+    <summary>Product Quick-View</summary>
+    <description>This Magento extension will add ajax functionality to the product category pages. Users can view a product, select product options, and add to cart without leaving the product category page.&#xD;
+&#xD;
+This is the Alpha release of the QuickView extension. Please report bugs to james.luke318@gmail.com</description>
+    <notes>Please report bugs to james.luke318@gmail.com</notes>
+    <authors><author><name>Luke James</name><user>luke</user><email>james.luke318@gmail.com</email></author></authors>
+    <date>2013-07-23</date>
+    <time>22:58:58</time>
+    <contents><target name="magelocal"><dir name="MV"><dir name="Quickview"><dir><dir name="Block"><dir name="Product"><file name="List.php" hash="990e80450353085a16e0be32a7cebd35"/></dir></dir><dir name="Helper"><file name="Data.php" hash="2a1247014298d35a240a7bba138cc83c"/></dir><dir name="Model"><dir name="System"><dir name="Config"><dir name="Source"><file name="Producttypes.php" hash="e25985f11155ab6440829d4a08add52b"/></dir></dir></dir></dir><dir name="controllers"><file name="IndexController.php" hash="9a62b0670c2442756b2208ba26a93a15"/></dir><dir name="etc"><file name="config.xml" hash="306d413bbcaaf8db41485bde9d1ea090"/><file name="system.xml" hash="23467f2c19602fb71e0e813e4e86a3e7"/></dir></dir></dir></dir></target><target name="mageetc"><dir name="modules"><file name="MV_Quickview.xml" hash="995427cd44716dbf6d739d8ff7af6da5"/></dir></target><target name="magedesign"><dir name="frontend"><dir name="base"><dir name="default"><dir name="layout"><file name="quickview.xml" hash="176dc0248609681d45d95e73ed578bc4"/></dir></dir></dir></dir></target><target name="mageskin"><dir name="frontend"><dir name="base"><dir name="default"><dir name="js"><file name="quickview.js" hash="2096d88441d729903777d477061e0cac"/></dir><dir name="css"><file name="quickview.css" hash="a7e5099734e1d025a27aaf45e538ef24"/></dir></dir></dir></dir></target><target name="mage"><dir name="js"><dir name="jquery"><file name="jquery-1.8.2.js" hash="64247ac3dbd8874f9c201613e6c35c99"/><file name="noconflict.js" hash="b7e23297ea200ee9051b734b56e5eec7"/></dir></dir></target></contents>
+    <compatible/>
+    <dependencies><required><php><min>5.2.0</min><max>6.0.0</max></php></required></dependencies>
+</package>

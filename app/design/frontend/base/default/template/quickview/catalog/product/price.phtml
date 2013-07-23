@@ -426,18 +426,40 @@
         </div>
     <?php endif; /* if ($this->getDisplayMinimalPrice() && $_minimalPrice): */ ?>
 <?php endif; /* if (!$_product->isGrouped()): */ ?>
-                <!-- <div id="<?= $_product->getSku() ?>_quickview" class="quickview-button"> -->
-			        <a href="javascript:lightbox(null,'<?= $this->getBaseUrl() ?>quickview/index/window?product_id=<?= $_product->getId() ?>');">QUICK VIEW</a>
-               <!-- </div> -->
+
+<?php $availableProductTypes = explode(',',Mage::getStoreConfig('settings/settings/producttypes')); ?>
+<?php if(in_array($_product->getTypeId(),$availableProductTypes)) : ?>
+<?php $session = Mage::getSingleton("core/session",  array("name"=>"frontend")); ?>
+<?php $displayMode = $session->getData('displaymode'); ?>
+<?php if(isSet($displayMode) && $displayMode == 'list') : ?>
+                    <!-- <a style="display:none; font-weight:bold; text-decoration:none; background-color:#000000; border-radius:3px; padding:2px 5px; opacity:0.7; color:#ffffff;" id="qv-<?php echo $_product->getId(); ?>" href="javascript:lightbox(null,'<?php echo $this->getBaseUrl(); ?>quickview/index/window?product_id=<?php echo $_product->getId(); ?>');"><?php echo Mage::getStoreConfig('settings/settings/button_text'); ?></a> -->
+                    <a style="<?php echo Mage::getStoreConfig('settings/settings/button_css_list'); ?>" id="qv-<?php echo $_product->getId(); ?>" href="javascript:lightbox(null,'<?php echo $this->getBaseUrl(); ?>quickview/index/window?product_id=<?php echo $_product->getId(); ?>');"><?php echo Mage::getStoreConfig('settings/settings/button_text'); ?></a>
                     <script type="text/javascript">
                         $jQuery(document).ready(function() {
-                                $jQuery("#<?= $_product->getSku() ?>").hover(function() {
-                                    $jQuery('#<?= $_product->getSku() ?>_quickview').fadeIn('fast');
+                                $jQuery('#qv-<?php echo $_product->getId(); ?>').parent().parent().hover(function() {
+                                    $jQuery('#qv-<?php echo $_product->getId(); ?>').fadeIn('fast');
                                 },
                                 function() {
-                                    $jQuery('#<?= $_product->getSku() ?>_quickview').fadeOut('fast');
+                                    $jQuery('#qv-<?php echo $_product->getId(); ?>').fadeOut('fast');
                                 }
                             );
                         });
                     </script>
-                
+<?php $session->unsetData('day_filter'); ?>
+<?php elseif(isSet($displayMode) && $displayMode == 'grid') : ?>
+			       <!-- <a style="position:absolute; top:10px; display:none; font-weight:bold; text-decoration:none; background-color:#000000; border-radius:3px; padding:2px 5px; opacity:0.7; color:#ffffff;" id="qv-<?php echo $_product->getId(); ?>" href="javascript:lightbox(null,'<?php echo $this->getBaseUrl(); ?>quickview/index/window?product_id=<?php echo $_product->getId(); ?>');"><?php echo Mage::getStoreConfig('settings/settings/button_text'); ?></a> -->
+                   <a style="<?php echo Mage::getStoreConfig('settings/settings/button_css_grid'); ?>" id="qv-<?php echo $_product->getId(); ?>" href="javascript:lightbox(null,'<?php echo $this->getBaseUrl(); ?>quickview/index/window?product_id=<?php echo $_product->getId(); ?>');"><?php echo Mage::getStoreConfig('settings/settings/button_text'); ?></a>
+                    <script type="text/javascript">
+                        $jQuery(document).ready(function() {
+                                $jQuery('#qv-<?php echo $_product->getId(); ?>').parent().hover(function() {
+                                    $jQuery('#qv-<?php echo $_product->getId(); ?>').fadeIn('fast');
+                                },
+                                function() {
+                                    $jQuery('#qv-<?php echo $_product->getId(); ?>').fadeOut('fast');
+                                }
+                            );
+                        });
+                    </script>
+<?php $session->unsetData('day_filter'); ?>
+<?php endif; ?>
+<?php endif; ?>
