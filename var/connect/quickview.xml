@@ -1,10 +1,9 @@
 <_>
-   <form_key>fgvP8tldQURxTgFx</form_key>
-   <_create/>
+   <form_key>vq08dVkQ3SCauIzY</form_key>
    <name>MV_Quickview</name>
    <channel>community</channel>
    <version_ids>
-      <version_ids>1</version_ids>
+      <version_ids>2</version_ids>
    </version_ids>
    <summary>Product Quick-View</summary>
    <description>This Magento extension will add ajax functionality to the product category pages. Users can view a product, select product options, and add to cart without leaving the product category page.
@@ -13,7 +12,7 @@ This is the Alpha release of the QuickView extension. Please report bugs to jame
    <license>OSL</license>
    <license_uri/>
    <version>1.0.0</version>
-   <stability>alpha</stability>
+   <stability>stable</stability>
    <notes>Please report bugs to james.luke318@gmail.com</notes>
    <authors>
       <name>
@@ -43,7 +42,7 @@ This is the Alpha release of the QuickView extension. Please report bugs to jame
             <max/>
          </max>
          <files>
-            <files>      </files>
+            <files>                   </files>
          </files>
       </package>
       <extension>
@@ -74,7 +73,7 @@ This is the Alpha release of the QuickView extension. Please report bugs to jame
          <path>MV/Quickview/</path>
          <path>modules/MV_Quickview.xml</path>
          <path>frontend/base/default/layout/quickview.xml</path>
-         <path>ase/default/template/quickview/</path>
+         <path>frontend/base/default/template/quickview/</path>
          <path>frontend/base/default/js/quickview.js</path>
          <path>frontend/base/default/css/quickview.css</path>
          <path>js/jquery/</path>
@@ -110,4 +109,8 @@ This is the Alpha release of the QuickView extension. Please report bugs to jame
          <ignore/>
       </ignore>
    </contents>
+   <page>1</page>
+   <limit>200</limit>
+   <folder/>
+   <package/>
 </_>
