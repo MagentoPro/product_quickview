@@ -8,7 +8,7 @@
     if(Mage::getModel('catalog/layer')->getCurrentCategory()->getId() != 2 && !Mage::registry('current_product')) { 
         $session->setData('catid', Mage::getModel('catalog/layer')->getCurrentCategory()->getId());
     }
-    elseif($parts[1] != 'skin/frontend/base/default/images/spinner.gif') {
+    elseif(isset($parts[1]) && $parts[1] != 'skin/frontend/base/default/images/spinner.gif') {
         $session->setData('catid', 0); 
     }
 ?>
